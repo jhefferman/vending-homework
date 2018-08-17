@@ -1,0 +1,30 @@
+<div *ngIf="fruit; else noFruitFoundBlock">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mt-2">{{fruit.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <img class="ml-3 rounded fruit-image" [src]="fruit.img" alt="Picture of fruit">
+    <div class="col-12 col-lg-8" >
+      <p>{{fruit.description}}</p>
+      <p class="card-text">Availability: {{fruit.quantityAvailable}}</p>
+      <div class="mx-auto">
+        <button class="btn btn-success mt-1 mr-2"
+                (click)="fruitService.purchaseFruit(fruit)" 
+                [ngClass]="fruit.quantityAvailable > 0 ? 'btn-success' : 'btn-danger'" 
+                [disabled]="fruit.quantityAvailable == 0" >{{fruit.quantityAvailable > 0 ? 'Purchase' : 'Out of Stock'}}</button>
+        <button (click)="backToFruitList()" class="btn btn-primary mt-1">Back to Fruit List</button>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<ng-template #noFruitFoundBlock>
+  <div class="col-12">
+    <h1 class="mt-2">Fruit Not Found!</h1>
+    <button (click)="backToFruitList()" class="btn btn-primary mt-1">Back to Fruit List</button>
+  </div>
+</ng-template>
+
+

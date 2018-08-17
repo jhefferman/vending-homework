@@ -1,0 +1,25 @@
+
+
+<div class="col-md-12">
+    <h1 class="mt-2">List of Fruits</h1>
+    <input type="search" class="col-12 col-lg-4 form-control ds-input" id="search-input" (keyup)="searchFruits($event)" placeholder="Search..." aria-label="Search Fruits">
+</div>
+
+<div class="card-group">
+  <div class="col-12 col-lg-4" *ngFor="let fruit of fruits; index as i">
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">{{fruit.name}}</h5>
+        <p class="card-text">{{fruit.description.substring(0,75) + (fruit.description.length > 75 ? '...' : '')}}</p>
+        <p class="card-text">Availability: {{fruit.quantityAvailable}}</p>
+        <button class="btn mr-2 mt-1" 
+                (click)="fruitService.purchaseFruit(fruit)" 
+                [ngClass]="fruit.quantityAvailable > 0 ? 'btn-success' : 'btn-danger'" 
+                [disabled]="fruit.quantityAvailable == 0" >{{fruit.quantityAvailable > 0 ? 'Purchase' : 'Out of Stock'}}</button>
+        <button (click)="displayFruitDetails(fruit)"
+                class="mt-1 btn btn-primary">Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
